@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
+//ADD ABILITY TO TEST INERNAL METHODS IN THE ABSTRACT CLASS!
 namespace HandlerTests
 {
     internal class BaseServiceTests
