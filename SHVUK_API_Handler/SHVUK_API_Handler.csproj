@@ -42,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ApiArgs.cs" />
+    <Compile Include="Classes\ApiParameterException.cs" />
     <Compile Include="Classes\BaseService.cs" />
     <Compile Include="Classes\ScanstarService.cs" />
     <Compile Include="Classes\ServiceChecker.cs" />
     <Compile Include="Classes\TestAutomationService.cs" />
     <Compile Include="Configurations\ApiParams.cs" />
+    <Compile Include="Interfaces\IApiArugments.cs" />
     <Compile Include="Interfaces\IScanstarService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\ITestAutomationService.cs" />

@@ -47,5 +47,23 @@ namespace HandlerTests
             Assert.Throws<ArgumentException>(() => new ApiArgs((ApiParamKeys.SerialNumber, "456"), (ApiParamKeys.SerialNumber, "456")));
             Assert.Throws<ArgumentException>(() => new ApiArgs((ApiParamKeys.SerialNumber, "456"), (ApiParamKeys.SerialNumber, "789")));
         }
+
+        [Fact]
+        public void GetAllValues_ReturnsCorrectValues()
+        {
+            var args = new ApiArgs((ApiParamKeys.SerialNumber, "456"), (ApiParamKeys.CCN, "26"), (ApiParamKeys.Time, "11:49"));
+
+            var values = args.GetAllValues();
+
+            Assert.Equal("456", values[ApiParamKeys.SerialNumber]);
+            Assert.Equal("26", values[ApiParamKeys.CCN]);
+            Assert.Equal("11:49", values[ApiParamKeys.Time]);
+        }       
+
+        [Fact]
+        public void GetAllValues_ThrowsNullReferenceException()
+        {
+            Assert.Throws<NullReferenceException>(() => new ApiArgs().GetAllValues());
+        }
     }
 }

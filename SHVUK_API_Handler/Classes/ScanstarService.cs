@@ -1,4 +1,5 @@
-﻿using SHVUK_API_Handler.Interfaces;
+﻿using SHVUK_API_Handler.Configurations;
+using SHVUK_API_Handler.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -14,7 +15,14 @@ namespace SHVUK_API_Handler.Classes
         /// <summary>
         /// Represents all commands stored internally to the class. Commands are API endpoints, consisting of string kvps.
         /// </summary>
-        public override Dictionary<string, string> Commands => CommandSet;
+        public Dictionary<string, string> Commands => CommandSet;
+
+        /// <summary>
+        /// Represents the base url for the service. Stored internally to the class.
+        /// </summary>
+        public string BaseUrl => _baseUrl;
+
+        protected static readonly string _baseUrl = "https://scanstar.spellmanhv.local/UK/en-GB/GMT-Standard-Time/Desktop/";
 
         /// <summary>
         /// protected static readonly dictionary of commands for the service. Instantiated automatically to allow use of
@@ -22,9 +30,18 @@ namespace SHVUK_API_Handler.Classes
         /// </summary>
         protected static readonly Dictionary<string, string> CommandSet = new Dictionary<string, string>
         {
-             { "TestUrl","https://scanstar.spellmanhv.local/UK/en-GB/GMT-Standard-Time/Desktop//GloviaDataAccess/CheckBadgeStrMatMove?id=0010670"}      
+
+             {"TestUrl",_baseUrl+$"GloviaDataAccess/CheckBadgeStrMatMove?id=0010670"},
+             {"CheckEsd",_baseUrl+$"GloviaDataAccess/CheckESD?id={{{ApiParamKeys.EmployeeId}}}"},
+             {"CheckLabour",_baseUrl+$"GloviaDataAccess/GetEmployeeInfoFromBadge?id={{{ApiParamKeys.EmployeeId}}}" },
+             {"CheckMatMove", _baseUrl+$"GloviaDataAccess/CheckBadgeStrValidateMatMov?Badge={{{ApiParamKeys.EmployeeId}}}&location={{{ApiParamKeys.CCN}}}"},
+             {"GetSerialWoInfo",_baseUrl+$"MatMovStartPaperless/GetSerialWOInfo?id={{{ApiParamKeys.SerialNumber}}}"},
+             {"GetWoQuantityInfo",_baseUrl+$"MatMovStartPaperless/GetWOQtyInfo?id={{{ApiParamKeys.SerialNumber}}}"},
+             {"GetUserInfo",_baseUrl+$"GloviaDataAccess/CheckBadgeStrMatMove?id={{{ApiParamKeys.EmployeeId}}}" },
+             {"GetUserPicture",_baseUrl+$"Employee/GetUserImage?badgeID={{{ApiParamKeys.EmployeeId}}}&location={{{ApiParamKeys.CCN}}}&width={{{ApiParamKeys.ImageWidth}}}&height={{{ApiParamKeys.ImageHeight}}}"}
         };
 
+      
         /// <summary>
         /// Checks if the service is online by checking the TestUrl command.
         /// Allows us to not carry out additonal work if the service is offline.
@@ -37,6 +54,15 @@ namespace SHVUK_API_Handler.Classes
             }
         }
 
-        
+        /// <summary>
+        /// Processes the response from the API, and returns "NEEDS TO FIGURE OUT WHAT". This is specialised towards 
+        /// the Scanstar API, as we need to decode a HTML response to something tangible.
+        /// </summary>
+        protected internal override string ProcessResponse(string response)
+        {
+            throw new NotImplementedException();    
+        }
+
+
     }
 }

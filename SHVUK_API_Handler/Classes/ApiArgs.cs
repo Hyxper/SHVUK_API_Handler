@@ -12,7 +12,7 @@ namespace SHVUK_API_Handler.Classes
     /// A class that stores the arguments to be used in the API call. Will be used to replace {} parts of template API URL addresses 
     /// with a method inside BaseService class.
     /// </summary>
-    public class ApiArgs
+    public class ApiArgs : IApiArugments
     {
         /// <summary>
         /// Dictionary that stores the arguments to be used in the API call internally.
@@ -26,6 +26,24 @@ namespace SHVUK_API_Handler.Classes
         public ApiArgs(params (ApiParamKeys key, string value)[] args)
         {
             _args = args.ToDictionary(t => t.key, t => t.value);
+        }
+
+        /// <summary>
+        /// Returns all values in the dictionary.
+        /// </summary>
+        /// <returns>Dicitonary of KvP representing stored arguments</returns>
+        /// <exception cref="NullReferenceException">Thrown if dictionary is empty.</exception>
+
+        public Dictionary<ApiParamKeys, string> GetAllValues()
+        {
+            if(_args.Count > 0)
+            {
+                return _args;
+            }
+            else
+            {
+                throw new NullReferenceException("No arguments have been added to the dictionary in this ApiArgs.");
+            }
         }
 
         /// <summary>

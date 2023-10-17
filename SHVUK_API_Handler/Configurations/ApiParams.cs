@@ -13,6 +13,9 @@ namespace SHVUK_API_Handler.Configurations
     {
         SerialNumber,
         Time,
-        CCN
+        CCN,
+        EmployeeId,
+        ImageHeight,
+        ImageWidth
     }
 }

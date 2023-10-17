@@ -1,4 +1,5 @@
 ﻿using SHVUK_API_Handler.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace SHVUK_API_Handler.Classes
@@ -12,8 +13,14 @@ namespace SHVUK_API_Handler.Classes
         /// <summary>
         /// Represents all commands stored internally to the class. Commands are API endpoints, consisting of string kvps.
         /// </summary>
-        public override Dictionary<string, string> Commands => CommandSet;
+        public Dictionary<string, string> Commands => CommandSet;
 
+        /// <summary>
+        /// Represents the base url for the service. Stored internally to the class.
+        /// </summary>
+        public string BaseUrl => _baseUrl;
+
+        protected static readonly string _baseUrl = $"https://testautomationapi.spellmanhv.local/TestAutomation/";
         /// <summary>
         /// protected static readonly dictionary of commands for the service. Instantiated automatically to allow use of
         /// IsServiceOnline property.
@@ -22,6 +29,7 @@ namespace SHVUK_API_Handler.Classes
         {
              { "TestUrl","https://testautomationapi.spellmanhv.local/TestAutomation/VerifyCurrentRoutingFunction?SerialNumber=141341406&function=TEST"}
         };
+
 
         /// <summary>
         /// Checks if the service is online by checking the TestUrl command.
@@ -33,6 +41,15 @@ namespace SHVUK_API_Handler.Classes
             {
                 return ServiceChecker.IsOnline(CommandSet["TestUrl"]);
             }
+        }
+
+        /// <summary>
+        /// Processes the response from the API, and returns "NEEDS TO FIGURE OUT WHAT". This is specialised towards 
+        /// the Scanstar API, as we need to decode a HTML response to something tangible.
+        /// </summary>
+        protected internal override string ProcessResponse(string response)
+        {
+            throw new NotImplementedException();
         }
     }
 }
