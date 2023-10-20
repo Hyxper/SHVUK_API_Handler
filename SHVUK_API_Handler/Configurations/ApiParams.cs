@@ -16,6 +16,8 @@ namespace SHVUK_API_Handler.Configurations
         CCN,
         EmployeeId,
         ImageHeight,
-        ImageWidth
+        ImageWidth,
+        Routing_Function,
+        TestResult
     }
 }

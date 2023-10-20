@@ -25,8 +25,7 @@ namespace SHVUK_API_Handler.Classes
         {
             return ServiceChecker.IsOnline(url);
         }
-
-        protected internal abstract string ProcessResponse(string response);
+  
 
         /// <summary>
         /// Builds the API url for the service, replacing any placeholders with the values in the args object

@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;TEST</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -26,11 +26,14 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,16 +47,25 @@
     <Compile Include="Classes\ApiArgs.cs" />
     <Compile Include="Classes\ApiParameterException.cs" />
     <Compile Include="Classes\BaseService.cs" />
+    <Compile Include="Classes\DataProcessor.cs" />
+    <Compile Include="Classes\JsonResponseProcessor.cs" />
     <Compile Include="Classes\ScanstarService.cs" />
     <Compile Include="Classes\ServiceChecker.cs" />
     <Compile Include="Classes\TestAutomationService.cs" />
     <Compile Include="Configurations\ApiParams.cs" />
     <Compile Include="Interfaces\IApiArugments.cs" />
+    <Compile Include="Interfaces\IDataProcessor.cs" />
+    <Compile Include="Interfaces\IResponseProcessor.cs" />
     <Compile Include="Interfaces\IScanstarService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\ITestAutomationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DTO\README.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

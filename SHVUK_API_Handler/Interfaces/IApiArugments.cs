@@ -10,7 +10,7 @@ namespace SHVUK_API_Handler.Interfaces
     /// <summary>
     /// Laying down the foundation for the API arguments.
     /// </summary>
-    internal interface IApiArugments
+    public interface IApiArugments
     {
         string GetValue(ApiParamKeys key);
         Dictionary<ApiParamKeys, string> GetAllValues();

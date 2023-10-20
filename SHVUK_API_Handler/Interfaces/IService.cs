@@ -9,7 +9,7 @@ namespace SHVUK_API_Handler.Interfaces
     /// <summary>
     /// Interface for any API service in the package.
     /// </summary>
-    internal interface IService
+    public interface IService
     {
         /// <summary>
         /// The method used in API services classes to call the API, and reformat contents as required.

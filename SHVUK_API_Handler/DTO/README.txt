@@ -1,0 +1,1 @@
+﻿can generate DTOs (Data transfer objects) using https://app.quicktype.io/. This one is specifcally for converting JSON to C# classes.

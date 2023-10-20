@@ -20,9 +20,7 @@ namespace HandlerTests
             {
                {"TestUrl","https://scanstar.spellmanhv.local/UK/en-GB/GMT-Standard-Time/Desktop//GloviaDataAccess/CheckBadgeStrMatMove?id=0010670"},
                {"CheckESD",$"https://scanstar.spellmanhv.local/UK/en-GB/GMT-Standard-Time/Desktop/GloviaDataAccess/CheckESD?id={ApiParamKeys.EmployeeId}"}
-            };
-
-         
+            };      
         }
 
         private readonly string _baseUrl = "https://example.com/";

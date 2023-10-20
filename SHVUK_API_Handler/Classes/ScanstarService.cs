@@ -9,8 +9,11 @@ namespace SHVUK_API_Handler.Classes
 {
     /// <summary>
     /// Scanstar service class, inherits from BaseService and implements IScanstarService. Acts as a wrapper for the Scanstar API.
+    /// 
+    /// THIS CLASS IS NOT TO BE USED, AS THE SCANSTAR API IS STRICTLY INTERNAL (KEEPING IN CASE THIS CHANGES).
+    /// 
     /// </summary>
-    public class ScanstarService : BaseService, IScanstarService
+    internal class ScanstarService : BaseService, IScanstarService
     {
         /// <summary>
         /// Represents all commands stored internally to the class. Commands are API endpoints, consisting of string kvps.
@@ -40,8 +43,7 @@ namespace SHVUK_API_Handler.Classes
              {"GetUserInfo",_baseUrl+$"GloviaDataAccess/CheckBadgeStrMatMove?id={{{ApiParamKeys.EmployeeId}}}" },
              {"GetUserPicture",_baseUrl+$"Employee/GetUserImage?badgeID={{{ApiParamKeys.EmployeeId}}}&location={{{ApiParamKeys.CCN}}}&width={{{ApiParamKeys.ImageWidth}}}&height={{{ApiParamKeys.ImageHeight}}}"}
         };
-
-      
+  
         /// <summary>
         /// Checks if the service is online by checking the TestUrl command.
         /// Allows us to not carry out additonal work if the service is offline.
@@ -53,16 +55,6 @@ namespace SHVUK_API_Handler.Classes
                 return ServiceChecker.IsOnline(CommandSet["TestUrl"]);
             }
         }
-
-        /// <summary>
-        /// Processes the response from the API, and returns "NEEDS TO FIGURE OUT WHAT". This is specialised towards 
-        /// the Scanstar API, as we need to decode a HTML response to something tangible.
-        /// </summary>
-        protected internal override string ProcessResponse(string response)
-        {
-            throw new NotImplementedException();    
-        }
-
 
     }
 }

@@ -10,7 +10,7 @@ namespace SHVUK_API_Handler.Classes
 {
     /// <summary>
     /// A class that stores the arguments to be used in the API call. Will be used to replace {} parts of template API URL addresses 
-    /// with a method inside BaseService class.
+    /// with a method inside BaseService class. This object will be instantiated and built within the service classes once a top level method is called.
     /// </summary>
     public class ApiArgs : IApiArugments
     {
