@@ -78,6 +78,5 @@ namespace HandlerTests
             Assert.Throws<InvalidOperationException>(() => dataProcessor.Process<string>("application/json", "{}"));
         }
 
-
     }
 }

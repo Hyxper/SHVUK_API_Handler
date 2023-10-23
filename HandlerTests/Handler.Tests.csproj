@@ -95,8 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiArgsTests.cs" />
+    <Compile Include="ApiHandlerIntegrationTests.cs" />
+    <Compile Include="ApiHandlerTests.cs" />
     <Compile Include="BaseServiceTests.cs" />
     <Compile Include="DataProcessorTests.cs" />
+    <Compile Include="HttpClientFactoryTests.cs" />
+    <Compile Include="HttpServiceTests.cs" />
     <Compile Include="JsonResponseProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScanstarServiceTests.cs" />

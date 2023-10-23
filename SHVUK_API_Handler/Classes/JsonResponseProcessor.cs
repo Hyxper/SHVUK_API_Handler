@@ -42,12 +42,7 @@ namespace SHVUK_API_Handler.Classes
             }
             try
             {
-                T deserializedContent = JsonConvert.DeserializeObject<T>(rawContent); // using Newtonsoft.Json
-
-              
-
-               
-                
+                T deserializedContent = JsonConvert.DeserializeObject<T>(rawContent); // using Newtonsoft.Json         
                     return deserializedContent;
                 
             }

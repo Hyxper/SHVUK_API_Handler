@@ -45,16 +45,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ApiArgs.cs" />
+    <Compile Include="Classes\ApiHandler.cs" />
     <Compile Include="Classes\ApiParameterException.cs" />
     <Compile Include="Classes\BaseService.cs" />
     <Compile Include="Classes\DataProcessor.cs" />
+    <Compile Include="Classes\HttpService.cs" />
     <Compile Include="Classes\JsonResponseProcessor.cs" />
     <Compile Include="Classes\ScanstarService.cs" />
     <Compile Include="Classes\ServiceChecker.cs" />
     <Compile Include="Classes\TestAutomationService.cs" />
     <Compile Include="Configurations\ApiParams.cs" />
+    <Compile Include="DTO\TestAutomationService_DTO\VerifyCurrentRoutingFunction_DTO.cs" />
+    <Compile Include="Classes\HttpClientFactory.cs" />
     <Compile Include="Interfaces\IApiArugments.cs" />
+    <Compile Include="Interfaces\IApiHandler.cs" />
     <Compile Include="Interfaces\IDataProcessor.cs" />
+    <Compile Include="Interfaces\IHttpService.cs" />
     <Compile Include="Interfaces\IResponseProcessor.cs" />
     <Compile Include="Interfaces\IScanstarService.cs" />
     <Compile Include="Interfaces\IService.cs" />

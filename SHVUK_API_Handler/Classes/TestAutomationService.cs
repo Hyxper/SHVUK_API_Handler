@@ -1,6 +1,8 @@
 ﻿using SHVUK_API_Handler.Configurations;
+using SHVUK_API_Handler.DTO.TestAutomationService_DTO;
 using SHVUK_API_Handler.Interfaces;
 using System;
+using System.Net.Http;
 using System.Collections.Generic;
 
 namespace SHVUK_API_Handler.Classes
@@ -67,11 +69,19 @@ namespace SHVUK_API_Handler.Classes
         /// Processes the response from the API, and returns "NEEDS TO FIGURE OUT WHAT". This is specialised towards 
         /// the Scanstar API, as we need to decode a HTML response to something tangible.
         /// </summary>
-   
-
-        public Dictionary<string, string> VerifyCurrentRoutingFunction(string serialNumber, string routingFunction)
+        public VerifyCurrentRoutingFunction_DTO VerifyCurrentRoutingFunction(string serialNumber, string routingFunction)
         {
-            throw new NotImplementedException();
+            //CHECK ALL PROPEGATION WHERE APPROPIATE
+            if(IsServiceOnline) //Check service is on before we do any work
+            {
+                //build arguments and API string
+               
+
+            }
+            else //if not lets throw an exception.
+            {
+                throw new HttpRequestException("Service is offline.");
+            }
         }
 
         public Dictionary<string, string> SaveTestStatusAndMove(string serialNumber, bool testResult, string employeeId, string ccn)
