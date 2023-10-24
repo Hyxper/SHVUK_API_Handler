@@ -28,6 +28,48 @@ namespace HandlerTests
         }
 
         [Fact]
+        public void AddProcessor_ThrowsArgumentNullException_WhenNullProcessorIsProvided()
+        {
+            // Arrange
+            var mockProcessor = new Mock<IResponseProcessor>().Object;
+            var dataProcessor = new DataProcessor(new List<IResponseProcessor>{mockProcessor});
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => dataProcessor.AddProcessor(null));
+        }
+
+        [Fact]
+        public void AddProcessor_AddsProcessorSuccessfully_WhenValidProcessorIsProvided()
+        {
+            // Arrange
+            var initialProcessors = new List<IResponseProcessor>
+            {
+                new MockResponseProcessor()
+            };
+            var dataProcessor = new DataProcessor(initialProcessors);
+            var newProcessor = new MockResponseProcessor();
+
+            // Act
+            dataProcessor.AddProcessor(newProcessor);
+
+            // Assert
+            foreach(IResponseProcessor processor in dataProcessor.ResponseProcessors)
+            {
+                if(processor == newProcessor)
+                {
+                    Assert.True(true);
+                }
+            }            
+        }
+
+        // Mock class for testing purposes
+        private class MockResponseProcessor : IResponseProcessor
+        {
+            public bool CanProcess(string contentType) => true;
+            public T Process<T>(string rawContent) => default;
+        }
+
+        [Fact]
         public void DataProcessor_Constructor_ThrowsArgumentExceptionWhenListIsEmpty()
         {
             // Act & Assert

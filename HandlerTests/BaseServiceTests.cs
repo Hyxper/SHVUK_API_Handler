@@ -1,5 +1,6 @@
 ﻿using SHVUK_API_Handler.Classes;
 using SHVUK_API_Handler.Configurations;
+using SHVUK_API_Handler.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,7 +21,11 @@ namespace HandlerTests
             {
                {"TestUrl","https://scanstar.spellmanhv.local/UK/en-GB/GMT-Standard-Time/Desktop//GloviaDataAccess/CheckBadgeStrMatMove?id=0010670"},
                {"CheckESD",$"https://scanstar.spellmanhv.local/UK/en-GB/GMT-Standard-Time/Desktop/GloviaDataAccess/CheckESD?id={ApiParamKeys.EmployeeId}"}
-            };      
+            };
+
+            public TestableBaseService(IApiHandler apiHandler) : base(apiHandler)
+            {
+            }   
         }
 
         private readonly string _baseUrl = "https://example.com/";
@@ -29,7 +34,7 @@ namespace HandlerTests
         public void CheckEndpoint_WhenCalledReturnsTrue()
         {
             // Arrange
-            var service = new TestableBaseService();
+            var service = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
 
             // Act
             var result = service.CheckEndpoint("https://www.google.com");
@@ -42,7 +47,7 @@ namespace HandlerTests
         public void CheckEndpoint_HttpRequestException()
         {
             // Arrange
-            var service = new TestableBaseService();
+            var service = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             // Assert
             Assert.Throws<HttpRequestException>(() => service.CheckEndpoint("https://www.google.com/404"));
         } 
@@ -51,8 +56,8 @@ namespace HandlerTests
         public void CheckEndpoint_HttpRequestExceptionWithErrorCode()
         {
             // Arrange
-            var service = new TestableBaseService();
-            
+            var service = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
+
             // Act
             try
             {
@@ -68,7 +73,7 @@ namespace HandlerTests
         public void CheckEndpoint_ArugmentNullException()
         {
             // Arrange
-            var service = new TestableBaseService();
+            var service = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
 
             // Assert
             Assert.Throws<ArgumentNullException>(() => service.CheckEndpoint(null));
@@ -80,7 +85,7 @@ namespace HandlerTests
             // Arrange
             var apiArgs = new ApiArgs((ApiParamKeys.EmployeeId, "1234"));
             var rawUrl = _baseUrl + $"GloviaDataAccess/CheckESD?id={{{ApiParamKeys.EmployeeId}}}";
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
 
             // Act
             var result = baseService.BuildApiUrl(apiArgs, rawUrl);
@@ -93,7 +98,7 @@ namespace HandlerTests
         public void BuildApiUrl_ThrowsException_WhenPlaceholderIsMissing()
         {
             // Arrange
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var apiArgs = new ApiArgs((ApiParamKeys.EmployeeId, "1234"));
             var rawUrl = _baseUrl + $"GloviaDataAccess/CheckESD";
 
@@ -106,28 +111,28 @@ namespace HandlerTests
         [Fact]
         public void BuildApiUrl_ThrowsArgumentNullException_WhenRawUrlIsNull()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             Assert.Throws<ArgumentNullException>(() => baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234")), null));
         }
 
         [Fact]
         public void BuildApiUrl_ThrowsArgumentNullException_WhenRawUrlIsEmpty()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             Assert.Throws<ArgumentNullException>(() => baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234")), string.Empty));
         }
 
         [Fact]
         public void BuildApiUrl_ThrowsArgumentNullException_WhenArgsIsNull()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             Assert.Throws<ArgumentNullException>(() => baseService.BuildApiUrl(null, "SomeRawUrl"));
         }
 
         [Fact]
         public void BuildApiUrl_ReturnsModifiedUrl_WhenAllPlaceholdersAreReplaced()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var rawUrl = "https://example.com/api?id={EmployeeId}";
             var expectedUrl = "https://example.com/api?id=1234";
             var result = baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234")), rawUrl);
@@ -136,7 +141,7 @@ namespace HandlerTests
         [Fact]
         public void BuildApiUrl_ThrowsApiParameterException_WhenUnreplacedPlaceholder()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var rawUrl = "https://example.com/api?id={EmployeeId}&location={Location}";
             Assert.Throws<ApiParameterException>(() => baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234")), rawUrl));
         }
@@ -144,7 +149,7 @@ namespace HandlerTests
         [Fact]
         public void BuildApiUrl_ThrowsArgumentException_WhenArgsIsEmpty()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var rawUrl = "https://example.com/api?id={EmployeeId}";
             Assert.Throws<ArgumentException>(() => baseService.BuildApiUrl(new ApiArgs(), rawUrl));
         }
@@ -152,7 +157,7 @@ namespace HandlerTests
         [Fact]
         public void BuildApiUrl_ThrowsApiParameterException_WhenMalformedPlaceholderPresent()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var rawUrl = "https://example.com/api?id={{EmployeeId}";
             Assert.Throws<ApiParameterException>(() => baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234")), rawUrl));
         }
@@ -160,7 +165,7 @@ namespace HandlerTests
         [Fact]
         public void BuildApiUrl_ThrowsApiParameterException_WhenEmptyPlaceholderPresent()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var rawUrl = "https://example.com/api?id={}";
             Assert.Throws<ApiParameterException>(() => baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234")), rawUrl));
         }
@@ -168,7 +173,7 @@ namespace HandlerTests
         [Fact]
         public void BuildApiUrl_ThrowsApiParameterException_WhenArgsContainsUnusedKey()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var rawUrl = "https://example.com/api?id={EmployeeId}";
             Assert.Throws<ApiParameterException>(() => baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234"), (ApiParamKeys.CCN, "26")), rawUrl));
         }
@@ -176,7 +181,7 @@ namespace HandlerTests
         [Fact]
         public void BuildApiUrl_ReplacesAllIdenticalPlaceholders()
         {
-            var baseService = new TestableBaseService();
+            var baseService = new TestableBaseService(new ApiHandler(new HttpService(new HttpClient())));
             var rawUrl = "https://example.com/api?id={EmployeeId}&duplicateId={EmployeeId}";
             var expectedUrl = "https://example.com/api?id=1234&duplicateId=1234";
             var result = baseService.BuildApiUrl(new ApiArgs((ApiParamKeys.EmployeeId, "1234")), rawUrl);

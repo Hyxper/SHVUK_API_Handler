@@ -2,7 +2,10 @@
 
 namespace SHVUK_API_Handler.Classes
 {
-    public class ApiParameterException : Exception
+    /// <summary>
+    /// An exception designed to explicity handle errors related to API parameters.
+    /// </summary>
+    internal class ApiParameterException : Exception
     {
         // The parameter that caused the issue (missing or unreplaced)
         public string ProblematicParameter { get; private set; }

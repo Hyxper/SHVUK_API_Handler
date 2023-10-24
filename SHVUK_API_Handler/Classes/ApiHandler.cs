@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using SHVUK_API_Handler.Interfaces;
 using System.Net.Http.Headers;
+using System.Net;
 
 namespace SHVUK_API_Handler.Classes
 {
@@ -45,26 +46,55 @@ namespace SHVUK_API_Handler.Classes
             if (string.IsNullOrEmpty(uri))
             {
                 throw new ArgumentException("URI cannot be null or empty.", nameof(uri));
-            }         
+            }
+
             try
             {
                 HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
-                response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is an error
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized ||
+                    response.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    throw new UnauthorizedAccessException("Unauthorized or access denied.");
+                }
+
+                if (response.StatusCode == (HttpStatusCode)429)
+                {
+                    throw new InvalidOperationException("Too many requests. Rate limit exceeded.");
+                }
+
+                response.EnsureSuccessStatusCode();
                 var result = new Dictionary<string, string>
-            {
-                {"ContentType", response.Content.Headers.ContentType.MediaType},
-                {"Body", response.Content.ReadAsStringAsync().Result},
-            };
+        {
+            {"ContentType", response.Content.Headers.ContentType.MediaType},
+            {"Body", response.Content.ReadAsStringAsync().Result},
+        };
 
                 return result;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                throw new ApplicationException($"Unable to reach endpoint.", ex);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ApplicationException(ex.Message);
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new ApplicationException($"Request to {uri} timed out.", ex);
+            }
+            catch (UriFormatException ex)
+            {
+                throw new ApplicationException($"Invalid URI format: {uri}", ex);
             }
             catch (HttpRequestException ex)
             {
                 throw new ApplicationException($"Error fetching data from {uri}: {ex.Message}", ex);
             }
-            catch (Exception ex)
+            catch (AggregateException ex)
             {
-                throw new ApplicationException($"An unexpected error occurred: {ex.Message}", ex);
+                throw new ApplicationException($"Multiple errors occurred. First error: {ex.InnerExceptions[0].Message}", ex);
             }
         }
     }

@@ -11,7 +11,8 @@ namespace SHVUK_API_Handler.Interfaces
     {
         //encapsulate urls inside method. MAYBE SHOULD RETURN A SUPER OBJECT, WHERE WE CAN GET PROPS BY ID
         ///<summary>
-        /// Verifies the current routing function of a serial number.
+        /// Verifies the current routing function of a serial number. NOTE: In the event the incorrect routing function is supplied (or is unknown by the calling body), the API will return the correct routing function if
+        /// a match is found against the serial number. In this vein, you could call this method twice to first learn what the routing function is, and then call it again with the correct routing function.
         ///</summary>
         ///<remarks>
         /// API USE CASE/QUERY OUTCOMES:
@@ -37,9 +38,9 @@ namespace SHVUK_API_Handler.Interfaces
         ///     <c>errorMessage</c> "Exception from server Sequence contains no matching element".
         ///</remarks>
         /// <param name="serialNumber">Serial number of the unit</param>
-        /// <param name="routingFunction">Routing location of the unit</param>
+        /// <param name="routingFunction">Routing location of the unit. if routing fucntion is not supplied, default argument "" used instead.</param>
         /// <returns>Returns a list of string demonstrating returned data, otherwise throws x propegated exception on failure.</returns>
-        VerifyCurrentRoutingFunction_DTO VerifyCurrentRoutingFunction(string serialNumber, string routingFunction);
+        VerifyCurrentRoutingFunction_DTO VerifyCurrentRoutingFunction(string serialNumber, string routingFunction = "UNKNOWN");
 
         /// <summary>
         /// Saves the overall status of a test in Glovia, and moves the unit to the next routing location.

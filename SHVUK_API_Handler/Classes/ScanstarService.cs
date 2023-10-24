@@ -27,6 +27,15 @@ namespace SHVUK_API_Handler.Classes
 
         protected static readonly string _baseUrl = "https://scanstar.spellmanhv.local/UK/en-GB/GMT-Standard-Time/Desktop/";
 
+        public ScanstarService(IApiHandler apiHandler) : base(apiHandler)
+        {
+            //THIS IS COMPLETE FILLER, WILL REQUIRE A DIFFERENT RESPONSEPROCESSOR IF IMPLEMENTED!
+           //_dataProcessor = new DataProcessor(new List<IResponseProcessor> { new JsonResponseProcessor() });
+        }
+        
+          
+
+
         /// <summary>
         /// protected static readonly dictionary of commands for the service. Instantiated automatically to allow use of
         /// IsServiceOnline property.
@@ -43,7 +52,8 @@ namespace SHVUK_API_Handler.Classes
              {"GetUserInfo",_baseUrl+$"GloviaDataAccess/CheckBadgeStrMatMove?id={{{ApiParamKeys.EmployeeId}}}" },
              {"GetUserPicture",_baseUrl+$"Employee/GetUserImage?badgeID={{{ApiParamKeys.EmployeeId}}}&location={{{ApiParamKeys.CCN}}}&width={{{ApiParamKeys.ImageWidth}}}&height={{{ApiParamKeys.ImageHeight}}}"}
         };
-  
+
+   
         /// <summary>
         /// Checks if the service is online by checking the TestUrl command.
         /// Allows us to not carry out additonal work if the service is offline.

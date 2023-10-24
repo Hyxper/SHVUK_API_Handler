@@ -9,7 +9,7 @@ namespace SHVUK_API_Handler.Interfaces
     /// <summary>
     /// Interface that defines the work an API handler must do.
     /// </summary>
-    internal interface IApiHandler
+    public interface IApiHandler
     {
         //ADDITIONAL METHODS TO BE ADDED AS NEEDED, MUST ALSO BE ADDED TO HTTPSERVICE.CS ALONGSIDE NEW TESTS FOR EACH!!
 

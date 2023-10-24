@@ -18,5 +18,13 @@ namespace SHVUK_API_Handler.Interfaces
         /// <param name="rawContent">Raw string of information recieved by API</param>
         /// <returns></returns>
         T Process<T>(string contentType, string rawContent);
+
+        /// <summary>
+        /// Adds a response processor to the list of processors. In the event we neec to add more processors or support different decoding formats.
+        /// </summary>
+        /// <param name="responseProcessor">A new type of responseProcessor</param>
+        void AddProcessor(IResponseProcessor responseProcessor);
+
+        IEnumerable<IResponseProcessor> ResponseProcessors { get; }
     }
 }

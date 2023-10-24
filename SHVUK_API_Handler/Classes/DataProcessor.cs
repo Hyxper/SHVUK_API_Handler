@@ -12,6 +12,7 @@ namespace SHVUK_API_Handler.Classes
     /// </summary>
     internal class DataProcessor : IDataProcessor
     {
+        public IEnumerable<IResponseProcessor> ResponseProcessors => _responseProcessors;
         private IEnumerable<IResponseProcessor> _responseProcessors;
 
         /// <summary>
@@ -27,6 +28,16 @@ namespace SHVUK_API_Handler.Classes
             _responseProcessors = responseProcessors;
         }
 
+        public void AddProcessor(IResponseProcessor responseProcessor)
+        {
+            if(responseProcessor == null)
+            {
+                throw new ArgumentNullException(nameof(responseProcessor));
+            }       
+            _responseProcessors.Append(responseProcessor);
+        }
+
+     
         /// <summary>
         /// Processes the raw content based on its content type using the appropriate processor.
         /// </summary>

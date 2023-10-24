@@ -11,14 +11,7 @@ namespace SHVUK_API_Handler.Interfaces
     /// </summary>
     public interface IService
     {
-        /// <summary>
-        /// The method used in API services classes to call the API, and reformat contents as required.
-        /// </summary>
-        /// <typeparam name="T">Generic type to work with in the method</typeparam>
-        /// <param name="apiUrl">formatted api URL to use in the HTTP request</param>
-        /// <returns>A list T, represnting processed contents of the API</returns>
-        // List<T> InvokeAPI<T>(string apiUrl);
-
+       
         ///<summary>
         ///gets the base url for all API calls.
         ///</summary>
@@ -29,7 +22,9 @@ namespace SHVUK_API_Handler.Interfaces
         /// </summary>
         Dictionary<string, string> Commands { get; }
 
-        
+        void AddProcessor(IResponseProcessor responseProcessor);
+
+        IEnumerable<IResponseProcessor> StoredProcessors();
 
     }
 }

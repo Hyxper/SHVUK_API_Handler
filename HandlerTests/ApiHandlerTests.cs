@@ -76,6 +76,55 @@ namespace HandlerTests
             // Act & Assert
             Assert.Throws<ApplicationException>(() => _apiHandler.Get(testUri));
         }
+
+        [Fact]
+        public void Get_ThrowsApplicationException_WhenRequestTimesOut()
+        {
+            // Arrange
+            var testUri = "https://timeouturi.com";
+            _mockHttpService.Setup(x => x.GetAsync(testUri)).Throws<TaskCanceledException>();
+
+            // Act & Assert
+            var ex = Assert.Throws<ApplicationException>(() => _apiHandler.Get(testUri));
+            Assert.Contains("timed out", ex.Message);
+        }
+
+        [Fact]
+        public void Get_ThrowsApplicationException_WhenUriIsInvalid()
+        {
+            // Arrange
+            var testUri = "invalid uri";
+            _mockHttpService.Setup(x => x.GetAsync(testUri)).Throws<UriFormatException>();
+
+            // Act & Assert
+            var ex = Assert.Throws<ApplicationException>(() => _apiHandler.Get(testUri));
+            Assert.Contains("Invalid URI format", ex.Message);
+        }
+
+        [Fact]
+        public void Get_ThrowsUnauthorizedAccessException_WhenApiResponseIsUnauthorizedOrForbidden()
+        {
+            // Arrange
+            var testUri = "https://unauthorizeduri.com";
+            var unauthorizedResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+            _mockHttpService.Setup(x => x.GetAsync(testUri)).ReturnsAsync(unauthorizedResponse);
+
+            // Act & Assert
+            Assert.Throws<ApplicationException>(() => _apiHandler.Get(testUri));
+        }
+
+        [Fact]
+        public void Get_ThrowsInvalidOperationException_WhenRateLimitIsExceeded()
+        {
+            // Arrange
+            var testUri = "https://httpbin.org/status/429";
+            var rateLimitedResponse = new HttpResponseMessage((HttpStatusCode)429); // Too Many Requests
+            _mockHttpService.Setup(x => x.GetAsync(testUri)).ReturnsAsync(rateLimitedResponse);
+
+            // Act & Assert
+            var ex = Assert.Throws<ApplicationException>(() => _apiHandler.Get(testUri));
+            Assert.Contains("Rate limit exceeded", ex.Message);
+        }
     }
 }
 
