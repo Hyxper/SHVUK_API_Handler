@@ -26,7 +26,7 @@ namespace SHVUK_API_Handler.Classes
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiHandler"/> class.
         /// </summary>
-        /// <param name="httpService">Provides the HTTP service for fetching data from APIs.</param>
+        /// <param name="httpClient">Provides the HTTP service for fetching data from APIs.</param>
         /// <exception cref="ArgumentNullException">Thrown if httpService is null.</exception>
         public ApiHandler(IHttpService httpClient)
         {
@@ -95,6 +95,10 @@ namespace SHVUK_API_Handler.Classes
             catch (AggregateException ex)
             {
                 throw new ApplicationException($"Multiple errors occurred. First error: {ex.InnerExceptions[0].Message}", ex);
+            }
+            catch(Exception ex)
+            {
+                throw new ApplicationException($"Unexpected error: {ex.Message}", ex);
             }
         }
     }

@@ -25,6 +25,9 @@ namespace SHVUK_API_Handler.Interfaces
         /// <param name="responseProcessor">A new type of responseProcessor</param>
         void AddProcessor(IResponseProcessor responseProcessor);
 
+        /// <summary>
+        /// Getable property for the list of response processors.
+        /// </summary>
         IEnumerable<IResponseProcessor> ResponseProcessors { get; }
     }
 }
