@@ -19,11 +19,11 @@ namespace SHVUK_API_Handler.Interfaces
         bool CanProcess(string contentType);
 
         /// <summary>
-        /// Processes the string into a type T.
+        /// Processes the string into a type T (A DTO).
         /// </summary>
         /// <typeparam name="T">DTO object that is being transformed</typeparam>
-        /// <param name="response"></param>
-        /// <returns></returns>
+        /// <param name="content">Api response data to be processed by the data processor</param>
+        /// <returns>the processed data of type T (DTO)</returns>
         T Process<T>(string content);
     }
 }

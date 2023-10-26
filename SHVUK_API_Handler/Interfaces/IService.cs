@@ -22,8 +22,15 @@ namespace SHVUK_API_Handler.Interfaces
         /// </summary>
         Dictionary<string, string> Commands { get; }
 
+        /// <summary>
+        /// Adds a passed processor that implements IResponseProcessor to the list of processors.
+        /// </summary>
+        /// <param name="responseProcessor"></param>
         void AddProcessor(IResponseProcessor responseProcessor);
 
+        /// <summary>
+        /// Gets the list of Response Processors
+        /// </summary>
         IEnumerable<IResponseProcessor> StoredProcessors();
 
     }

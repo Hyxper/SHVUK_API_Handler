@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace SHVUK_API_Handler.Classes
 {
-    /// <summary>
-    /// Base class for all services
-    /// <sumamry>
+      /// <summary>
+      /// Base service for all service classes.
+      /// </summary>
     public abstract class BaseService
     {
-
         /// <summary>
         /// Api Handler for handling all API requests
         /// </summary>
@@ -24,6 +23,10 @@ namespace SHVUK_API_Handler.Classes
         /// </summary>
         protected  IDataProcessor _dataProcessor;
 
+        /// <summary>
+        /// Constructor for the base service. Expects an IApiHandler to be passed as this is required for all extending classes.
+        /// </summary>
+        /// <param name="apiHandler">an instance of IApiHandler.</param>
         protected BaseService(IApiHandler apiHandler)
         {
             _apiHandler = apiHandler;
@@ -64,6 +67,7 @@ namespace SHVUK_API_Handler.Classes
         /// Builds the API url for the service, replacing any placeholders with the values in the args object
         /// </summary>
         /// <param name="args">an instantiated object that has translated simple string arguments to a object to build url</param>
+        /// <param name="rawUrl">the raw url that needs to be built</param>
         /// <returns>Returns a formatted string the be used in the HTTP request</returns>
 
         protected internal virtual string BuildApiUrl(IApiArugments args,string rawUrl)
@@ -110,7 +114,7 @@ namespace SHVUK_API_Handler.Classes
                 // Return the modified URL
                 return rawUrl;
             }
-            catch (NullReferenceException ex)
+            catch (NullReferenceException ex) //try to catch if for some reason obj makes it through.
             {
                 throw new ArgumentException("args should not be empty.", nameof(args), ex);
             }

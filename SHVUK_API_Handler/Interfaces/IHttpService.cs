@@ -24,5 +24,12 @@ namespace SHVUK_API_Handler.Interfaces
         /// <param name="uri">The URI of the HTTP request.</param>
         /// <returns>The HTTP response message or a propegated exception.</returns>
         Task<HttpResponseMessage> GetAsync(string uri);
+        /// <summary>
+        /// Sends a POST request to the specified URI and returns the response.
+        /// </summary>
+        /// <param name="uri">The URI of the HTTP request.</param>
+        /// <param name="content">Data contents to send with the POST request. Is "" by default.</param>
+        /// <returns>The HTTP response message or a propegated exception.</returns>
+        Task<HttpResponseMessage> PostAsync(string uri, string content);
     }
 }

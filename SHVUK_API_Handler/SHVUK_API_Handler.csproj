@@ -21,6 +21,7 @@
     <DefineConstants>TRACE;TEST</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SHVUK_API_Handler.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\SHVUK_API_Handler.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -56,11 +58,14 @@
     <Compile Include="Classes\SHVUKApiException.cs" />
     <Compile Include="Classes\TestAutomationService.cs" />
     <Compile Include="Configurations\ApiParams.cs" />
+    <Compile Include="DTO\TestAutomationService_DTO\GetWOInfo_DTO.CS" />
+    <Compile Include="DTO\TestAutomationService_DTO\SaveTestStatusAndMove_DTO.cs" />
     <Compile Include="DTO\TestAutomationService_DTO\VerifyCurrentRoutingFunction_DTO.cs" />
     <Compile Include="Classes\HttpClientFactory.cs" />
     <Compile Include="Interfaces\IApiArugments.cs" />
     <Compile Include="Interfaces\IApiHandler.cs" />
     <Compile Include="Interfaces\IDataProcessor.cs" />
+    <Compile Include="Interfaces\IDataTransferObject.cs" />
     <Compile Include="Interfaces\IHttpService.cs" />
     <Compile Include="Interfaces\IResponseProcessor.cs" />
     <Compile Include="Interfaces\IScanstarService.cs" />

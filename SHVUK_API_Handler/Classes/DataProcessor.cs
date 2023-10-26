@@ -13,12 +13,12 @@ namespace SHVUK_API_Handler.Classes
     internal class DataProcessor : IDataProcessor
     {
         public IEnumerable<IResponseProcessor> ResponseProcessors => _responseProcessors;
-        private IEnumerable<IResponseProcessor> _responseProcessors;
+        private readonly IEnumerable<IResponseProcessor> _responseProcessors;
 
         /// <summary>
         /// Initializes a new instance of the DataProcessor class.
         /// </summary>
-        /// <param name="processors">The set of processors available for processing different content types.</param>
+        /// <param name="responseProcessors">The set of processors available for processing different content types.</param>
         public DataProcessor(IEnumerable<IResponseProcessor> responseProcessors)
         {
             if(responseProcessors.Count() == 0)

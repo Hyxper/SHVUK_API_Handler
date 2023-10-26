@@ -33,5 +33,18 @@ namespace SHVUK_API_Handler.Classes
         {
             return _httpClient.GetAsync(uri);
         }
+        /// <summary>
+        /// Sends a GET request to the specified Uri as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The Uri the request is sent to.</param>
+        /// <param name="content">content to post. Note that is "" by default as SHV APIs do not expect to be sent data.</param>
+        /// <returns>The HTTP response message.</returns>
+        public Task<HttpResponseMessage> PostAsync(string uri,string content = "")
+        {
+            var requestContent = new StringContent(content, Encoding.UTF8); //May need to state media type here.
+            return _httpClient.PostAsync(uri, requestContent);
+        }
+
+
     }
 }

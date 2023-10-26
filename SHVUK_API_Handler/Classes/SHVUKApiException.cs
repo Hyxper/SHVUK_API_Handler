@@ -11,10 +11,22 @@ namespace SHVUK_API_Handler.Classes
     /// </summary>
     public class SHVUKApiException : Exception
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SHVUKApiException() : base() { }
 
+        /// <summary>
+        /// Gets message from the base class.
+        /// </summary>
+        /// <param name="message">Exception message</param>
         public SHVUKApiException(string message) : base(message) { }
 
+        /// <summary>
+        /// Gets message and inner exception from the base class.
+        /// </summary>
+        /// <param name="message">Exception message</param>
+        /// <param name="innerException">The thrown inner exception</param>
         public SHVUKApiException(string message, Exception innerException)
             : base(message, innerException) { }
     }

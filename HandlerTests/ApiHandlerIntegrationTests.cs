@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Moq;
+using System.Net;
 
 namespace HandlerTests
 {
@@ -104,6 +106,41 @@ namespace HandlerTests
             Assert.Equal(mediaType, response["ContentType"]);
             Assert.True(response.ContainsKey("Body"));
             Assert.Contains("Disallow", response["Body"]);
+        }
+
+         [Fact]
+        public void Post_ReturnsExpectedResult_WhenUsingHttpBin()
+        {
+            // Arrange
+            string testUri = "https://httpbin.org/post";
+            string content = "{content}";
+            HttpClient jsonClient = HttpClientFactory.CreateJSONClient();
+            IHttpService httpService = new HttpService(jsonClient);  // Assuming you've created an HttpService class that implements IHttpService.
+            ApiHandler apiHandler = new ApiHandler(httpService);
+
+            // Act
+            var result = apiHandler.Post(testUri, content);
+
+            // Assert
+            Assert.Equal("application/json", result["ContentType"]);
+            Assert.Contains("httpbin.org/post", result["Body"]);
+        }
+
+        [Fact]
+        public void Post_ReturnsExpectedResult_WhenUsingHttpBinWithNoContent()
+        {
+            // Arrange
+            string testUri = "https://httpbin.org/post";
+            HttpClient jsonClient = HttpClientFactory.CreateJSONClient();
+            IHttpService httpService = new HttpService(jsonClient);  // Assuming you've created an HttpService class that implements IHttpService.
+            ApiHandler apiHandler = new ApiHandler(httpService);
+
+            // Act
+            var result = apiHandler.Post(testUri);
+
+            // Assert
+            Assert.Equal("application/json", result["ContentType"]);
+            Assert.Contains("httpbin.org/post", result["Body"]);
         }
     }
 }
