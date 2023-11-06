@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\APIResponseException.cs" />
     <Compile Include="Classes\ApiArgs.cs" />
     <Compile Include="Classes\ApiHandler.cs" />
     <Compile Include="Classes\ApiParameterException.cs" />

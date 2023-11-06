@@ -39,11 +39,11 @@ namespace SHVUK_API_Handler.DTO.TestAutomationService_DTO
         {
             if (ErrorMessage != null && FromFunction == null && !FunctionMatches) // there is an error message, but no from function or function matches.
             {
-                throw new SHVUKApiException($"Error from VerifyCurrentRoutingFunction endpoint. Data was returned but this error message is present: {ErrorMessage}");
+                throw new APIResponseException($"Error from VerifyCurrentRoutingFunction endpoint. Data was returned but this error message is present: {ErrorMessage}");
             }
             else if (ErrorMessage == null && FromFunction == null && !FunctionMatches) // ruck knows what has happened here!
             {
-                throw new SHVUKApiException($"API must be working very strangely, all fields returned null...");
+                throw new APIResponseException($"API must be working very strangely, all fields returned null...");
             }
         }
     }

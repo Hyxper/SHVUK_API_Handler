@@ -161,9 +161,9 @@ namespace SHVUK_API_Handler.Classes
             {
                 throw new SHVUKApiException($"An error occured when invoking and using the API: {ex.Message}", ex);
             }
-            catch (SHVUKApiException ex) //thrown by validate method.
+            catch (APIResponseException ex) //thrown by validate method.
             {
-                throw ex;
+                throw new SHVUKApiException(ex.Message);
             }
             catch (Exception ex)//top level exception handling. Should also handled propegated errors. This is the entrypoint for users using the API! This level should handle all errors. We dont expect.
             {
@@ -224,9 +224,9 @@ namespace SHVUK_API_Handler.Classes
             {
                 throw new SHVUKApiException($"An error occured when invoking and using the API: {ex.Message}", ex);
             }
-            catch (SHVUKApiException ex) //thrown by validate method.
+            catch (APIResponseException ex) //thrown by validate method.
             {
-                throw ex;
+                throw new SHVUKApiException(ex.Message);
             }
             catch (Exception ex)//top level exception handling. Should also handled propegated errors. This is the entrypoint for users using the API! This level should handle all errors. We dont expect.
             {
@@ -285,9 +285,9 @@ namespace SHVUK_API_Handler.Classes
             {
                 throw new SHVUKApiException($"An error occured when invoking and using the API: {ex.Message}", ex);
             }
-            catch (SHVUKApiException ex) //thrown by validate method.
+            catch (APIResponseException ex) //thrown by validate method.
             {
-                throw ex;
+                throw new SHVUKApiException(ex.Message);
             }
             catch (Exception ex)//top level exception handling. Should also handled propegated errors. This is the entrypoint for users using the API! This level should handle all errors. We dont expect.
             {

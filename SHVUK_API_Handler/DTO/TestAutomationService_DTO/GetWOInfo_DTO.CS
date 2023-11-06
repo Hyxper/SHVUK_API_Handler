@@ -22,11 +22,12 @@ namespace SHVUK_API_Handler.DTO.TestAutomationService_DTO
         {
             if (ErrorMessage != null)
             {
-                throw new SHVUKApiException($"Error from GetWOInfo endpoint. Data was returned but this error message is present: {ErrorMessage}");
+                throw new APIResponseException($"Error from GetWOInfo endpoint. Data was returned but this error message is present: {ErrorMessage}");
+               
             }
             else if (!DidSucceed)
             {
-                throw new SHVUKApiException($"Endpoint GetWOInfo reported an unsuccessful transaction on return.");
+                throw new APIResponseException($"Endpoint GetWOInfo reported an unsuccessful transaction on return.");
             }
         }
 

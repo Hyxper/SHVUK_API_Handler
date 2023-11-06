@@ -39,7 +39,7 @@ namespace SHVUK_API_Handler.DTO.TestAutomationService_DTO
         {
             if (!DidSucceed)
             {
-                throw new SHVUKApiException($"The API reported a problem moving the serial number through routing. Field: {FieldName} Message: {ValidationMsg}");
+                throw new APIResponseException($"The API reported a problem moving the serial number through routing. Field: {FieldName} Message: {ValidationMsg}");
             }
         }
     }
