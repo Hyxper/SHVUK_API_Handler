@@ -163,7 +163,7 @@ namespace SHVUK_API_Handler.Classes
             }
             catch (APIResponseException ex) //thrown by validate method.
             {
-                throw new SHVUKApiException(ex.Message);
+                throw new SHVUKApiException(ex.Message, ex);
             }
             catch (Exception ex)//top level exception handling. Should also handled propegated errors. This is the entrypoint for users using the API! This level should handle all errors. We dont expect.
             {
@@ -226,7 +226,7 @@ namespace SHVUK_API_Handler.Classes
             }
             catch (APIResponseException ex) //thrown by validate method.
             {
-                throw new SHVUKApiException(ex.Message);
+                throw new SHVUKApiException(ex.Message, ex);
             }
             catch (Exception ex)//top level exception handling. Should also handled propegated errors. This is the entrypoint for users using the API! This level should handle all errors. We dont expect.
             {
@@ -287,7 +287,7 @@ namespace SHVUK_API_Handler.Classes
             }
             catch (APIResponseException ex) //thrown by validate method.
             {
-                throw new SHVUKApiException(ex.Message);
+                throw new SHVUKApiException(ex.Message, ex);
             }
             catch (Exception ex)//top level exception handling. Should also handled propegated errors. This is the entrypoint for users using the API! This level should handle all errors. We dont expect.
             {
