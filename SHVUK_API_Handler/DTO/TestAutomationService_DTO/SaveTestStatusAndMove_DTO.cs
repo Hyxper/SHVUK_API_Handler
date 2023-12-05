@@ -12,7 +12,7 @@ namespace SHVUK_API_Handler.DTO.TestAutomationService_DTO
     /// <summary>
     /// A Data Transfer Object for the SaveTestStatusAndMove method that belongs to the TestAutomation API service.
     /// </summary>
-    public class SaveTestStatusAndMove_DTO : IDataTransferObject
+    public class SaveTestStatusAndMove_DTO : BaseDTO, IDataTransferObject
     {
         /// <summary>
         /// DTO property representing an API field
@@ -35,7 +35,7 @@ namespace SHVUK_API_Handler.DTO.TestAutomationService_DTO
         /// Method that self validates the DTO.
         ///</summary>
         ///
-        public void Validate()
+        public override void Validate()
         {
             if (!DidSucceed)
             {

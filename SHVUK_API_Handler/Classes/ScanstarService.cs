@@ -60,9 +60,18 @@ namespace SHVUK_API_Handler.Classes
         /// </summary>
         public static bool IsServiceOnline
         {
+
             get
             {
-                return ServiceChecker.IsOnline(CommandSet["TestUrl"]);
+                try
+                {
+                    return ServiceChecker.IsOnline(CommandSet["TestUrl"]);
+                }
+                catch(Exception ex)
+                {
+                    throw new SHVUKApiException($"Unable to check if service is online. {ex.Message}", ex);
+                }
+                
             }
         }
 

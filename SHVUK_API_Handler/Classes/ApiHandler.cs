@@ -166,7 +166,7 @@ namespace SHVUK_API_Handler.Classes
             {
                 throw new ApplicationException($"Multiple errors occurred. First error: {ex.InnerExceptions[0].Message}", ex);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw new ApplicationException($"Unexpected error: {ex.Message}", ex);
             }
