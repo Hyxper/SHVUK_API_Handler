@@ -11,6 +11,6 @@ namespace SHVUK_API_Handler.Interfaces
     /// </summary>
     public interface IDataTransferObject
     {
-       
+        void Validate();
     }
 }

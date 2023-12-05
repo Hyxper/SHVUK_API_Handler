@@ -80,7 +80,15 @@ namespace SHVUK_API_Handler.Classes
         {
             get
             {
-                return ServiceChecker.IsOnline(CommandSet["TestUrl"]);
+                try
+                {
+                    return ServiceChecker.IsOnline(CommandSet["TestUrl"]);
+                }
+                catch(Exception ex)
+                {
+                    throw new SHVUKApiException(ex.Message,ex);
+                }
+               
             }
         }
 
