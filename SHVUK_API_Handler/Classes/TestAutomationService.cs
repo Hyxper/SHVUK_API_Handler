@@ -35,7 +35,7 @@ namespace SHVUK_API_Handler.Classes
         }
 
 
-#if TEST || DEBUG
+#if !RELEASE
         /// <summary>
         /// Base URL used to describe the API endpoint. Stored internally to the class. Also used to build template queries in CommandSet
         /// </summary>
@@ -124,7 +124,7 @@ namespace SHVUK_API_Handler.Classes
         /// <returns>Returns a list of string demonstrating returned data. or a SHVUKApiException in the event of an issue (all exceptions are propegated, so internal excepetions are available).</returns>
         /// <exception cref="SHVUKApiException">Will throw any exception regarding operation as this type. Inner exceptions are availble for view if desired or required.</exception>
 
-        public VerifyCurrentRoutingFunction_DTO VerifyCurrentRoutingFunction(string serialNumber, string routingFunction)
+        public VerifyCurrentRoutingFunction_DTO VerifyCurrentRoutingFunction(string serialNumber, string routingFunction = "UNKNOWN")
         {
 
             //May need some serial number validation here.... (Or a overall validation method for the service(s))
@@ -198,7 +198,7 @@ namespace SHVUK_API_Handler.Classes
                 if (IsServiceOnline) //Check service is on before we do any work
                 {
                     //build arguments and API string
-                    IApiArugments args = new ApiArgs((ApiParamKeys.SerialNumber, serialNumber), (ApiParamKeys.TestResult, testResult.ToString().ToLower()), (ApiParamKeys.EmployeeId, employeeId), (ApiParamKeys.CCN,ccn)); //shouldnt needto check for doo doo args, only error handling here is for IP
+                    IApiArugments args = new ApiArgs((ApiParamKeys.SerialNumber, serialNumber), (ApiParamKeys.TestResult, testResult.ToString().ToLower()), (ApiParamKeys.EmployeeId, employeeId), (ApiParamKeys.CCN,ccn)); //shouldnt needto check for doo doo args, only error handling here is for IP. t
                     string url = BuildApiUrl(args, Commands["SaveTestStatusAndMove"]);
                     Dictionary<string, string> content = _apiHandler.Post(url);
                     IDataTransferObject result = _dataProcessor.Process<SaveTestStatusAndMove_DTO>(content["ContentType"], content["Body"]);//application exception catches here.

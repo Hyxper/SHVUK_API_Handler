@@ -82,4 +82,10 @@
     <Content Include="DTO\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+    copy "$(TargetPath)" "$(TargetDir)API_DEBUG$(TargetExt)"
+    del "$(TargetPath)"
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
