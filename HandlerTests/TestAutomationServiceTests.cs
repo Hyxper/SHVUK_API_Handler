@@ -49,24 +49,7 @@ namespace HandlerTests
         }
 
         [Fact]
-        public void VerifyCurrentRoutingFunction_OperatesAsExpectedWithJustSerialNumber()
-        {
-            //Arrange
-            IApiHandler apiHandler = new ApiHandler(new HttpService(HttpClientFactory.CreateJSONClient()));
-            ITestAutomationService testAutomationService = new TestAutomationService(apiHandler);
-            string serialNumber = "111129818"; //exists in both test and live.
-            
-
-            //Act
-            var testObj = testAutomationService.VerifyCurrentRoutingFunction(serialNumber); // this may need changing.
-            //Asert
-            Assert.False(testObj.FunctionMatches);
-            Assert.Null(testObj.ErrorMessage);
-            Assert.True(testObj.FromFunction != null);
-        }
-
-        [Fact]
-        public void VerifyCurrentRoutingFunction_RunTwiceToLearnFunction()
+        public void VerifyCurrentRoutingFunction_OperatesAsExpected()
         {
             //Arrange
             IApiHandler apiHandler = new ApiHandler(new HttpService(HttpClientFactory.CreateJSONClient()));

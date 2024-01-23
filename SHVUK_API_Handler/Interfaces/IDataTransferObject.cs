@@ -11,6 +11,9 @@ namespace SHVUK_API_Handler.Interfaces
     /// </summary>
     public interface IDataTransferObject
     {
+        /// <summary>
+        /// Validates the DTOs data once instantiated.
+        /// </summary>
         void Validate();
     }
 }
