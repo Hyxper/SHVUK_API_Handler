@@ -57,6 +57,10 @@
     <Reference Include="NuGet.Frameworks, Version=6.5.0.154, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\NuGet.Frameworks.6.5.0\lib\net472\NuGet.Frameworks.dll</HintPath>
     </Reference>
+    <Reference Include="SHVUK_API_Handler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SHVUK_API_Handler\bin\Release\SHVUK_API_Handler.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
@@ -114,12 +118,6 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.1.4.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
     <Analyzer Include="..\packages\xunit.analyzers.1.4.0\analyzers\dotnet\cs\xunit.analyzers.fixes.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SHVUK_API_Handler\SHVUK_API_Handler.csproj">
-      <Project>{9a3b11af-07ec-448b-b4fa-d4bc38f190b7}</Project>
-      <Name>SHVUK_API_Handler</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
